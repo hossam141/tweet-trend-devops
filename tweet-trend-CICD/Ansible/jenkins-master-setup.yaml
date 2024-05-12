@@ -1,0 +1,44 @@
+---
+- name: Install Jenkins on Ubuntu
+  hosts: jenkins-master
+  become: true
+  vars:
+    jenkins_apt_key: "https://pkg.jenkins.io/debian/jenkins.io.key"
+    jenkins_apt_repo: "deb https://pkg.jenkins.io/debian-stable binary/"
+    jenkins_package: "jenkins"
+    java_package: "openjdk-11-jdk"
+  tasks:
+    - name: Add Jenkins apt key
+      apt_key:
+        url: "{{ jenkins_apt_key }}"
+        state: present
+
+    - name: Add Jenkins apt repository
+      apt_repository:
+        repo: "{{ jenkins_apt_repo }}"
+        state: present
+
+    - name: Add OpenJDK apt repository
+      apt_repository:
+        repo: "ppa:openjdk-r/ppa"
+        state: present
+
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install Java
+      apt:
+        name: "{{ java_package }}"
+        state: present
+
+    - name: Install Jenkins
+      apt:
+        name: "{{ jenkins_package }}"
+        state: present
+
+    - name: Start Jenkins service
+      service:
+        name: jenkins
+        state: started
+        enabled: yes
