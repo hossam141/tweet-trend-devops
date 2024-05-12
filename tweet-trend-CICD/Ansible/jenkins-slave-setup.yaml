@@ -1,0 +1,29 @@
+---
+- hosts: jenkins-slave
+  become: true
+  vars:
+    java_package: "openjdk-11-jre"
+    maven_version: "3.9.2"
+    maven_url: "https://dlcdn.apache.org/maven/maven-3/{{ maven_version }}/binaries/apache-maven-{{ maven_version }}-bin.tar.gz"
+    maven_install_dir: "/opt/apache-maven-{{ maven_version }}"
+  tasks:
+    - name: update ubuntu repo and cache 
+      apt: 
+        update_cache: yes 
+        force_apt_get: yes 
+
+    - name: install java 
+      apt: 
+        name: "{{ java_package }}"
+        state: present
+
+    - name: download maven packages 
+      get_url:
+        url: "{{ maven_url }}"
+        dest: "/opt"
+
+    - name: extract maven packages 
+      unarchive:
+        src: "/opt/apache-maven-{{ maven_version }}-bin.tar.gz"
+        dest: "/opt"
+        remote_src: yes
