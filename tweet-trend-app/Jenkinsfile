@@ -1,0 +1,24 @@
+pipeline {
+    agent {
+        node {
+            label 'maven-agent'
+        }
+    }
+
+    stages {
+        stage('Clone code') {
+             steps {
+                script {
+                    sh '''
+                    git clone --no-checkout https://github.com/hossam141/tweet-trend-devops.git
+                    cd tweet-trend-devops
+                    git config core.sparseCheckout true
+                    echo "tweet-trend-app/*" > .git/info/sparse-checkout
+                    git checkout main
+                    '''
+                }
+             }
+        
+        }   
+    }
+}
