@@ -9,6 +9,19 @@ environment {
     PATH = "/opt/apache-maven-3.9.1/bin:$PATH"
 }
     stages {
+         stage('Clone code') {
+             steps {
+                script {
+                    sh '''
+                    git clone --no-checkout https://github.com/hossam141/tweet-trend-devops.git
+                    cd tweet-trend-devops
+                    git config core.sparseCheckout true
+                    echo "tweet-trend-app/*" > .git/info/sparse-checkout
+                    git checkout main
+                    '''
+                }
+             }
+         }
         stage('build'){
             steps {
                 sh 'mvn clean deploy'
