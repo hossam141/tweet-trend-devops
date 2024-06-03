@@ -75,5 +75,3 @@ This project has significantly enhanced our infrastructure's automation, reliabi
 ## Connect
 
 Feel free to reach out if you have any questions or need further information about this project!
-
-#DevOps #Terraform #Jenkins #Ansible #Kubernetes #CI/CD #SonarQube #JFrogArtifactory #Prometheus #Grafana #Automation #IAC #CodeQuality #Docker #Git #Cloud #Maven #Helm #AWS #SRE
