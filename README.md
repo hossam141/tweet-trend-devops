@@ -1,5 +1,5 @@
 
-# E2E DevOps Project
+# Tweet-Trend DevOps Project
 
 This project demonstrates a comprehensive end-to-end DevOps pipeline, leveraging multiple tools and technologies to streamline and enhance the continuous integration and continuous delivery (CI/CD) processes.
 
